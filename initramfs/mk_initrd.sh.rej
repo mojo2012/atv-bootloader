@@ -1,0 +1,64 @@
+--- initramfs/mk_initrd.sh	(revision 518)
++++ initramfs/mk_initrd.sh	(working copy)
+@@ -42,37 +42,39 @@
+ # copy standard apps
+ #
+ cp -a  /bin/bash			bin/
+-#cp -a  /usr/bin/ldd                     usr/bin/
++cp -a  /usr/bin/ldd                     usr/bin/
+ cp -a  /sbin/ldconfig.real		sbin/ldconfig
+ #
+-cp -a  /sbin/dosfsck			sbin/fsck.msdos
+-ln -s  /sbin/fsck.msdos sbin/fsck.vfat
+-cp -a  /sbin/mkdosfs			sbin/mkfs.msdos
++#cp -a  /sbin/dosfsck			sbin/fsck.msdos
++#ln -s  /sbin/fsck.msdos sbin/fsck.vfat
++#cp -a  /sbin/mkdosfs			sbin/mkfs.msdos
+ cp -a  /sbin/mkfs.ext3			sbin/
+ #cp -a  /sbin/fsck                  sbin/
+ cp -a  /sbin/fsck.ext3                  sbin/
+-ln -s  /sbin/fsck.ext3 sbin/fsck.ext2
++#ln -s  /sbin/fsck.ext3 sbin/fsck.ext2
+ 
+-cp -a  /sbin/fsck.nfs			sbin/
+-cp -a  /sbin/fsck.xfs			sbin/
+-cp -a  /sbin/fsck.reiserfs		sbin/
++#cp -a  /sbin/fsck.nfs			sbin/
++#cp -a  /sbin/fsck.xfs			sbin/
++#cp -a  /sbin/fsck.reiserfs		sbin/
+ 
+ # copy blkid, findfs
+-cp -a  /sbin/blkid                    sbin/
+-cp -a  /sbin/findfs                    sbin/
++#cp -a  /sbin/blkid                    sbin/
++#cp -a  /sbin/findfs                    sbin/
+ 
+ # copy lspci
+-cp -a  /usr/bin/lspci			usr/bin/
++#cp -a  /usr/bin/lspci			usr/bin/
+ 
+ # copy nano, add sybolic link to pico
+-cp -a  /bin/nano                        bin/
+-ln -s  /bin/nano bin/pico
++#cp -a  /bin/nano                        bin/
++#ln -s  /bin/nano bin/pico
+ 
+ # copy our built apps
+ cp -a  ../apps/kexec/build/kexec        sbin/
+ cp -a  ../apps/rEFIt/build/gptsync	usr/bin/
+ cp -a  ../apps/parted/build/parted	usr/sbin/
+ cp -a  ../apps/parted/build/partprobe	usr/sbin/
++cp -a  ../apps/open-iscsi/build/iscsistart sbin/
++cp -a  ../apps/aoetools/build/aoe-*	sbin/
+ cp -a  ../apps/hfs_support/build/fsck.hfsplus sbin/
+ ln -s  sbin/fsck.hfsplus sbin/fsck.hfs
+ cp -a  ../apps/hfs_support/build/mkfs.hfsplus sbin/
+@@ -81,6 +83,8 @@
+ cp -a  ../apps/boot_linux.sh		usr/sbin/
+ cp -a  ../apps/boot_parser/boot_parser	usr/sbin/
+ cp -a  ../apps/find_run_script.sh	usr/sbin/
++cp -a  ../apps/boot_iscsi.sh            usr/sbin/
++cp -a  ../apps/boot_aoe.sh              usr/sbin/
+ 
+ # copy seed files for startup
+ cp -a  ../seed_files/init		./
